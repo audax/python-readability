@@ -8,7 +8,10 @@ import re
 # Python 2.7 compatibility.
 import sys
 if sys.version < '3':
+    PY3 = False
     str = unicode
+else:
+    PY3 = True
 
 logging.getLogger().setLevel(logging.DEBUG)
 
@@ -38,7 +41,11 @@ def normalize_entities(cur_title):
         u'\u00BB': '"',
         u'&quot;': '"',
     }
-    for c, r in entities.iteritems():
+    if PY3:
+        items = entities.items()
+    else:
+        items = entities.iteritems()
+    for c, r in items:
         if c in cur_title:
             cur_title = cur_title.replace(c, r)
 
