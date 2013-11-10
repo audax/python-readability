@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
+import sys
+
+if sys.version < '3':
+    chardet_module = "chardet"
+else:
+    chardet_module = "chardet2"
+
 
 setup(
     name="readability-lxml",
@@ -13,7 +20,7 @@ setup(
     url="https://github.com/audax/python-readability",
     packages=['readability'],
     install_requires=[
-        "chardet",
+        chardet_module,
         "lxml"
         ],
     classifiers=[
